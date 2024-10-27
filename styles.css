@@ -1,32 +1,4 @@
-:root {
-    --svg-color: currentColor; /* 默认使用当前文本颜色 */
-    --background-color: #fff; /* 默认背景颜色 */
-}
-
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    transition: background-color 0.3s;
-}
-
-.icon {
-    fill: var(--svg-color);
-    width: 100px;
-    height: 100px;
-}
-
-#toggleNightMode {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.night-mode {
-    --background-color: #333;
-    color: #fff;
+.element {
+  background-color: 000000; /* 设置背景颜色为白色 */
+  color: FFFFFF; /* 设置文字颜色为黑色 */
 }
