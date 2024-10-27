@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Switch SVG on Night Mode</title>
+    <style>
+        body.night-mode {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        .toggle-mode {
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- 默认的SVG图像 -->
+    <object id="svgObject" type="image/svg+xml" data="day.svg">Your browser does not support SVG</object>
+
+    <div class="toggle-mode" onclick="toggleMode()">切换夜间模式</div>
+
+    <script>
+        function toggleMode() {
+            var bodyClass = document.body.classList;
+            var svgObject = document.getElementById('svgObject');
+            
+            if (bodyClass.contains('night-mode')) {
+                svgObject.data = 'icon library/LOGO.svg'; // 切换回日间模式的SVG
+                bodyClass.remove('night-mode');
+            } else {
+                svgObject.data = 'icon library/LOGO2.svg'; // 切换到夜间模式的SVG
+                bodyClass.add('night-mode');
+            }
+        }
+    </script>
+</body>
+</html>
