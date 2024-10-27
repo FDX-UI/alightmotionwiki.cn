@@ -1,7 +1,6 @@
 document.getElementById('a1').addEventListener('click', function() {
     document.body.classList.toggle('a2');
-    
-    // 更新按钮文本
+    // 114514
     const button = document.getElementById('a1');
     if (document.body.classList.contains('a2')) {
         button.textContent = '切换到白天模式';
