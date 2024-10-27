@@ -1,4 +1,48 @@
-.element {
-  background-color: 000000; /* 设置背景颜色为白色 */
-  color: FFFFFF; /* 设置文字颜色为黑色 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+}
+
+input[type="text"] {
+    padding: 10px;
+    width: 80%;
+    margin-top: 10px;
+}
+
+nav {
+    background-color: #333;
+    text-align: center; /* 使nav的内容居中 */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav li {
+    display: inline; /* 将每个li元素设置为行内块 */
+    margin-right: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.content-box {
+    background-color: #444;
+    height: 150px;
+    margin-bottom: 10px;
 }
