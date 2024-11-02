@@ -88,47 +88,62 @@ body {
   display: none; /* 暗色模式时隐藏太阳图标 */
 }
 
+/* 搜索框容器样式 */
 .search-container {
-  display: flex; /* 使用弹性布局 */
-  justify-content: center; /* 在主轴上居中 */
-  align-items: center; /* 在交叉轴上居中 */
-  padding: 0 16px; /* 距离屏幕边缘8像素 */
-  margin-top: 10px; /* 搜索框与标题之间的间距 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 8px;
+  margin-top: 10px;
 }
 
 /* 搜索框样式 */
 .search-box {
   padding: 10px;
-  width: calc(100% - 16px); /* 减去padding的宽度，保持整体宽度 */
-  box-sizing: border-box; /* 包括padding和border在内的宽度计算 */
-  border: 1px solid #4caf50; /* 边框颜色 */
-  border-radius: 25px; /* 圆角 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
-  outline: none; /* 去掉输入框的默认外边框 */
-  transition: all 0.3s ease; /* 动画效果 */
+  width: calc(100% - 16px);
+  box-sizing: border-box;
+  border: 1px solid #4caf50;
+  border-radius: 25px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  outline: none;
+  transition: all 0.3s ease;
 }
 
 /* 搜索框聚焦时样式 */
 .search-box:focus {
-  border-color: #76ff03; /* 聚焦时边框颜色变化 */
-  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5); /* 聚焦时阴影变化 */
+  border-color: #76ff03;
+  box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5);
 }
 
 /* 搜索按钮样式 */
 .search-button {
-  padding: 8px 20px; 
-  border: none; 
-  background-color: #4caf50; /* 按钮背景色 */
-  color: white; 
-  margin-left: 10px; /* 按钮与搜索框之间的间距 */
-  border-radius: 25px; /* 圆角 */
-  cursor: pointer; /* 鼠标光标样式 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
-  transition: background-color 0.3s ease; /* 按钮背景颜色动效 */
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  margin-left: 10px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
 /* 搜索按钮悬浮时样式 */
 .search-button:hover {
-  background-color: #45a049; /* 悬停时按钮颜色变化 */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时阴影变化 */
+  background-color: #45a049;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* 内容区域样式 */
+.content {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(-20px);
+}
+
+.content.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }

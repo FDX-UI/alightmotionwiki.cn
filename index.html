@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8"> <!-- 设置页面编码格式 -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 响应式布局设置 -->
-<title>AlightMotionWiki</title> <!-- 页面标题 -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AlightMotionWiki</title>
 <!-- 引入Font Awesome图标库 -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <!-- 链接外部样式表 -->
@@ -11,32 +11,41 @@
 </head>
 <body>
 
-<!-- 搜索框容器 -->
 <header>
   <div class="search-container">
-    <!-- 搜索框 -->
-    <input type="text" placeholder="搜索..." class="search-box">
-    <!-- 搜索按钮 -->
-    <button class="search-button">搜索</button>
+      <input type="text" placeholder="搜索..." class="search-box">
+      <button class="search-button">搜索</button>
   </div>
 </header>
 
-<!-- 导航栏容器 -->
 <div class="slider-navigation">
-  <!-- 导航项容器 -->
   <div class="nav-container">
     <!-- 导航项 -->
-    <div class="nav-item active">百科</div>
-    <div class="nav-item">下载</div>
-    <div class="nav-item">公告</div>
+    <div class="nav-item active" data-target="百科">百科</div>
+    <div class="nav-item" data-target="下载">下载</div>
+    <div class="nav-item" data-target="公告">公告</div>
   </div>
   <!-- 模式切换按钮 -->
   <div class="mode-toggle" id="modeToggle">
-    <i class="fas fa-sun"></i> <!-- 太阳图标 -->
-    <i class="fas fa-moon"></i> <!-- 月亮图标 -->
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
   </div>
   <!-- 滑动条 -->
   <div class="slider-bar"></div>
+</div>
+
+<!-- 内容区域 -->
+<div id="百科" class="content active">
+  <h2>百科内容</h2>
+  <p>这里是百科的内容...</p>
+</div>
+<div id="下载" class="content">
+  <h2>下载内容</h2>
+  <p>这里是下载的内容...</p>
+</div>
+<div id="公告" class="content">
+  <h2>公告内容</h2>
+  <p>这里是公告的内容...</p>
 </div>
 
 <!-- 链接外部脚本 -->
