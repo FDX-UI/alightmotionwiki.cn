@@ -1,27 +1,193 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Align Motion Wiki</title>
-    <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+<head>
+  <header>
+    <div class="search-container">
+        <input type="text" placeholder="搜索..." class="search-box">
+        <button class="search-button">搜索</button>
+        <STyle>
+          .search-container {
+    display: inline-block; /* 使搜索框和按钮水平排列 */
+    margin-top: 10px; /* 搜索框与标题之间的间距 */
+}
+
+.search-box {
+    padding: 10px;
+    width: 250px; /* 调整宽度 */
+    border: 1px solid #4caf50; /* 边框颜色 */
+    border-radius: 25px; /* 圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
+    outline: none; /* 去掉输入框的默认外边框 */
+    transition: all 0.3s ease; /* 动画效果 */
+}
+
+.search-box:focus {
+    border-color: #76ff03; /* 聚焦时边框颜色变化 */
+    box-shadow: 0 4px 15px rgba(0, 255, 0, 0.5); /* 聚焦时阴影变化 */
+}
+
+.search-button {
+    padding: 10px 20px; 
+    border: none; 
+    background-color: #4caf50; /* 按钮背景色 */
+    color: white; 
+    margin-left: 10px; /* 按钮与搜索框之间的间距 */
+    border-radius: 25px; /* 圆角 */
+    cursor: pointer; /* 鼠标光标样式 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
+    transition: background-color 0.3s ease; /* 按钮背景颜色动效 */
+}
+
+.search-button:hover {
+    background-color: #45a049; /* 悬停时按钮颜色变化 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 悬停时阴影变化 */
+}
+
+        </STyle>
+    </div>
+</header>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
+  <title>滑块导航栏示例</title>
+  <!-- 引入Font Awesome图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+  <style>
+    /* 设置页面的基本字体和去除默认的边距 */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s, color 0.3s; /* 过渡动画效果 */
+    }
+    /* 定义暗色模式下的背景和文字颜色 */
+    .dark-mode {
+      background-color: #333;
+      color: #fff;
+    }
+    /* 导航栏容器样式 */
+    .slider-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+      padding: 20px;
+    }
+    /* 导航项容器样式 */
+    .nav-container {
+      display: flex;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      position: relative;
+    }
+    /* 单个导航项样式 */
+    .nav-item {
+      padding: 5px 10px;
+      margin-right: 10px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+      color: #333;
+    }
+    /* 导航项悬浮和焦点状态样式 */
+    .nav-item:hover,
+    .nav-item:focus {
+      color: #00FFA8;
+    }
+    /* 激活状态的导航项样式 */
+    .nav-item.active {
+      color: #00FFA8;
+    }
+    /* 滑动条样式 */
+    .slider-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      background-image: linear-gradient(to top, #00FFA8, rgba(0, 123, 255, 0));
+      transition: left 0.3s ease, width 0.3s ease;
+      z-index: 0;
+    }
+    /* 模式切换按钮样式 */
+    .mode-toggle {
+      cursor: pointer;
+      padding: 10px;
+      font-size: 1.5em;
+      color: #333;
+    }
+    /* 模式切换按钮悬浮样式 */
+    .mode-toggle:hover {
+      color: #00FFA8;
+    }
+    /* 暗色模式下月亮图标的显示和隐藏 */
+    .fa-moon {
+      display: none; /* 默认隐藏月亮图标 */
+    }
+    .dark-mode .fa-moon {
+      display: inline-block; /* 暗色模式时显示月亮图标 */
+    }
+    .dark-mode .fa-sun {
+      display: none; /* 暗色模式时隐藏太阳图标 */
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Align Motion Wiki</h1>
-        <input type="text" placeholder="搜索...">
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">百科</a></li>
-            <li><a href="#">下载</a></li>
-            <li><a href="#">公告</a></li>
-        </ul>
-    </nav>
-    <main>
-        <div class="content-box"></div>
-        <div class="content-box"></div>
-        <div class="content-box"></div>
-    </main>
+
+<div class="slider-navigation">
+  <div class="nav-container">
+    <!-- 导航项 -->
+    <div class="nav-item active">百科</div>
+    <div class="nav-item">下载</div>
+    <div class="nav-item">公告</div>
+  </div>
+  <!-- 模式切换按钮 -->
+  <div class="mode-toggle" id="modeToggle">
+    <i class="fas fa-sun"></i>
+    <i class="fas fa-moon"></i>
+  </div>
+  <!-- 滑动条 -->
+  <div class="slider-bar"></div>
+</div>
+
+<script>
+  // 获取所有的导航项和滑动条元素
+  const navItems = document.querySelectorAll('.nav-item');
+  const sliderBar = document.querySelector('.slider-bar');
+  const modeToggle = document.getElementById('modeToggle');
+
+  // 更新滑动条位置的函数
+  function updateSliderPosition() {
+    const activeItem = document.querySelector('.nav-item.active');
+    if (activeItem) {
+      const rect = activeItem.getBoundingClientRect();
+      sliderBar.style.width = `${rect.width}px`;
+      sliderBar.style.left = `${rect.left}px`;
+    }
+  }
+
+  // 切换暗色模式的函数
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+  }
+
+  // 初始化滑块位置
+  updateSliderPosition();
+
+  // 为每个导航项添加点击事件
+  navItems.forEach(item => {
+    item.addEventListener('click', function() {
+      navItems.forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+      updateSliderPosition();
+    });
+  });
+
+  // 为模式切换按钮添加点击事件
+  modeToggle.addEventListener('click', toggleDarkMode);
+</script>
+<!---------------------------------------------------------------------------------------------------------------------------------------------------------------->
 </body>
 </html>
