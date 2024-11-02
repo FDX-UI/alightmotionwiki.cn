@@ -12,6 +12,21 @@ body {
   color: #fff;
 }
 
+/* 暗色模式下导航项样式 */
+.dark-mode .nav-item {
+  color: #fff; /* 白色 */
+}
+
+/* 暗色模式下激活状态的导航项样式 */
+.dark-mode .nav-item.active {
+  color: #00FFA8; /* 保持不变 */
+}
+
+/* 暗色模式下模式切换按钮样式 */
+.dark-mode .mode-toggle {
+  color: #fff; /* 白色 */
+}
+
 /* 导航栏容器样式 */
 .slider-navigation {
   display: flex;
