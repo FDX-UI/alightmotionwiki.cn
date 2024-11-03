@@ -182,6 +182,109 @@ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
   transform: translateY(0);
 }
 
+/* 模态框样式 */
+.modal {
+  display: none; /* 默认隐藏 */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* 背景遮罩 */
+}
+
+/* 模态框内容区域样式 */
+.modal-content {
+  background-color: #fefefe;
+  margin: 100px auto; /* 调整为100px，使模态框居中 */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 50%; /* 调整宽度为50% */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* 关闭按钮样式 */
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 搜索结果列表样式 */
+#searchResults {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#searchResults li.search-result {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 12px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+#searchResults li.search-result:hover {
+  background-color: #f1f1f1;
+}
+
+#searchResults li.no-results {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  background-color: transparent;
+  border-color: #f1f1f1;
+  cursor: default;
+}
+
+#searchResults li.no-results:hover {
+  background-color: transparent;
+}
+
+/* 帖子预览样式 */
+.search-result-title {
+  font-weight: bold;
+  margin: 0;
+}
+
+.search-result-snippet {
+  margin: 5px 0;
+  color: #666;
+}
+
+.search-result-link {
+  margin-left: auto;
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.search-result-link:hover {
+  text-decoration: underline;
+}
+
+/* 模态框动画 */
+@keyframes animatetop {
+  from {top: -300px; opacity: 0}
+  to {top: 100px; opacity: 1}
+}
+
 /* 板块样式 */
 section {
   background-color: #2e2e2e;

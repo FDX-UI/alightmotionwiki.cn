@@ -52,3 +52,89 @@ document.addEventListener('DOMContentLoaded', function() {
 
   modeToggle.addEventListener('click', toggleDarkMode); // 为模式切换按钮添加点击事件
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const searchBox = document.querySelector('.search-box');
+  const searchButton = document.querySelector('.search-button');
+  const searchModal = document.getElementById('searchModal');
+  const closeBtn = searchModal.querySelector('.close-button');
+  const searchResults = document.getElementById('searchResults');
+  const sections = document.querySelectorAll('section');
+
+  // 点击搜索按钮执行搜索操作
+  searchButton.addEventListener('click', function() {
+    const query = searchBox.value.trim(); // 去除前后空格
+    if (query === '') {
+      // 如果输入框为空或只有空格，不进行搜索
+      searchModal.style.display = 'none';
+      return;
+    }
+    searchSections(query);
+  });
+
+  // 关闭按钮点击事件
+  closeBtn.addEventListener('click', function() {
+    searchModal.style.display = 'none';
+  });
+
+  // 点击模态框外部关闭模态框
+  window.addEventListener('click', function(event) {
+    if (event.target === searchModal) {
+      searchModal.style.display = 'none';
+    }
+  });
+
+  // 搜索section元素
+  function searchSections(query) {
+    searchResults.innerHTML = ''; // 清空之前的结果
+    let found = false;
+    sections.forEach(section => {
+      const sectionText = section.textContent.toLowerCase();
+      const queryLowerCase = query.toLowerCase();
+      if (sectionText.includes(queryLowerCase)) {
+        const li = document.createElement('li');
+        li.className = 'search-result';
+        const title = section.querySelector('h2') || section; // 假设每个section都有一个h2标题
+        const titleText = title.textContent.trim();
+        const snippet = sectionText.substring(0, 150) + '...'; // 取前150个字符作为摘要
+        const link = section.id ? `#${section.id}` : '#'; // 假设每个section都有id
+
+        li.innerHTML = `
+          <div>
+            <h3 class="search-result-title">${titleText}</h3>
+            <p class="search-result-snippet">${snippet}</p>
+          </div>
+          <a href="${link}" class="search-result-link">查看更多</a>
+        `;
+        searchResults.appendChild(li);
+        found = true;
+      }
+    });
+    if (!found) {
+      // 如果没有找到结果，显示“无结果”
+      const li = document.createElement('li');
+      li.textContent = '无结果';
+      li.classList.add('no-results');
+      searchResults.appendChild(li);
+      searchModal.style.display = 'block'; // 显示模态框
+    }
+    if (found) {
+      searchModal.style.display = 'block'; // 显示模态框
+    }
+  }
+
+  // 搜索结果点击事件
+  searchResults.addEventListener('click', function(e) {
+    if (e.target.classList.contains('search-result-link')) {
+      const href = e.target.getAttribute('href');
+      window.location.href = href;
+      searchModal.style.display = 'none';
+    } else if (e.target.tagName === 'LI' && e.target.classList.contains('search-result')) {
+      const link = e.target.querySelector('.search-result-link');
+      if (link) {
+        window.location.href = link.getAttribute('href');
+        searchModal.style.display = 'none';
+      }
+    }
+  });
+});
