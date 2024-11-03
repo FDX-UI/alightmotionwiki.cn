@@ -31,6 +31,14 @@ body {
     background-color: #fff;
     color:#000;
 }
+
+.dark-mode .search-box {
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .search-button {
+box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+}
 /* 导航栏容器样式 */
 .slider-navigation {
   display: flex;
@@ -109,20 +117,19 @@ body {
 
 /* 搜索框容器样式 */
 .search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 8px;
-  margin-top: 10px;
+  display: flex; /* 使用Flexbox布局 */
+  align-items: center; /* 垂直居中 */
+  position: relative;
+  width: 95%; /* 宽度自适应 */
+  margin: auto; /* 水平居中 */
 }
 
 /* 搜索框样式 */
 .search-box {
-  padding: 10px;
-  width: calc(100% - 16px);
-  box-sizing: border-box;
+  flex-grow: 1; /* 输入框占据剩余空间 */
+  padding: 10px 15px; /* 内边距 */
   border: 1px solid #4caf50;
-  border-radius: 25px;
+  border-radius: 25px 0 0 25px; /* 圆角 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   outline: none;
   transition: all 0.3s ease;
@@ -136,21 +143,28 @@ body {
 
 /* 搜索按钮样式 */
 .search-button {
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* 图标居中 */
+  padding: 36% 10px; /* 内边距 */
   border: none;
-  background-color: #4caf50;
-  color: white;
-  margin-left: 10px;
-  border-radius: 25px;
-  cursor: pointer;
+  background-color: #76ff03;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #000;
+  border-radius: 0 25px 25px 0; /* 圆角 */
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 /* 搜索按钮悬浮时样式 */
 .search-button:hover {
   background-color: #45a049;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+
+/* Font Awesome图标样式 */
+.search-button i {
+  pointer-events: none; /* 防止图标影响点击事件 */
 }
 
 /* 内容区域样式 */
@@ -168,13 +182,13 @@ body {
   transform: translateY(0);
 }
 
-/* 主要内容部分样式 */
+/* 板块样式 */
 section {
-    background-color: #2e2e2e;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 1px solid #3c3c3c;
-    color:#fff;
+  background-color: #2e2e2e;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3c3c3c;
+  color:#fff;
 }
