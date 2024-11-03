@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const searchModal = document.getElementById('searchModal');
   const searchResults = document.getElementById('searchResults');
   const closeBtn = document.querySelector('.close');
-
   let allPosts = []; // 用于存储所有帖子数据
 
+  // 更新滑动条位置
   function updateSliderPosition() {
     const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
@@ -20,8 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // 切换暗色模式
   function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
+    updateModeToggleIcons();
+  }
+
+  // 更新模式切换按钮的图标显示
+  function updateModeToggleIcons() {
     if (document.body.classList.contains('dark-mode')) {
       modeToggle.querySelector('.fa-sun').style.display = 'inline-block';
       modeToggle.querySelector('.fa-moon').style.display = 'none';
@@ -31,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // 显示特定内容区域
   function showContent(target) {
     contents.forEach(content => {
       if (content.id === target) {
@@ -46,8 +53,10 @@ document.addEventListener('DOMContentLoaded', function() {
     updateSliderPosition();
   }
 
+  // 初始化滑动条位置
   updateSliderPosition();
 
+  // 导航项点击事件
   navItems.forEach(item => {
     item.addEventListener('click', function() {
       navItems.forEach(i => i.classList.remove('active'));
@@ -57,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
+  // 模式切换按钮点击事件
   modeToggle.addEventListener('click', toggleDarkMode);
 
   // 读取JSON索引文件并渲染帖子
@@ -86,6 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
+  // 显示搜索结果
   function displaySearchResults(results) {
     searchResults.innerHTML = ''; // 清空之前的搜索结果
     if (results.length === 0) {
@@ -100,6 +111,7 @@ document.addEventListener('DOMContentLoaded', function() {
     adjustModalHeight(); // 调整模态框高度
   }
 
+  // 打开或关闭模态框
   function openModal(hasResults) {
     searchModal.style.display = hasResults ? 'block' : 'none';
     if (hasResults) {
@@ -107,21 +119,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  // 模态框关闭按钮事件
   closeBtn.addEventListener('click', function() {
     searchModal.style.display = 'none';
   });
 
+  // 调整模态框高度
   function adjustModalHeight() {
     const modalContent = document.querySelector('.modal-content');
     const searchResults = document.getElementById('searchResults');
-    
-    // 计算内容高度
     const contentHeight = searchResults.scrollHeight;
-    
-    // 设置模态框的高度
     modalContent.style.height = `${contentHeight + 40}px`; // 加上一些额外的padding
   }
 
+  // 渲染帖子到指定内容区域
   function renderPosts(contentId, posts) {
     const content = document.getElementById(contentId);
     content.innerHTML = ''; // 清空内容区域

@@ -27,22 +27,36 @@ body {
   color: #fff; /* 白色 */
 }
 
-.dark-mode section{
-    background-color: #fff;
-    color:#000;
+/* 暗色模式下内容区域和帖子样式 */
+.dark-mode .content,
+.dark-mode .post {
+  background-color: #333;
 }
 
+/* 暗色模式下搜索框和按钮 */
 .dark-mode .search-box {
+  background-color: #444;
+  color: #fff;
   box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
 }
 
 .dark-mode .search-button {
-box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
+  background-color: #00FFA8;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
 }
 
-/* 暗色模式下所有文本和背景颜色 */
-body.dark-mode {
+/* 暗色模式下模态框样式 */
+.dark-mode .modal-content {
   background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .modal a {
+  color: #fff;
+}
+
+/* 暗色模式下链接样式 */
+.dark-mode a {
   color: #fff;
 }
 
@@ -75,15 +89,6 @@ body.dark-mode {
   background-color: #00FFA8;
 }
 
-/* 暗色模式下内容区域和帖子样式 */
-.dark-mode .content {
-  background-color: #333;
-}
-
-.dark-mode .post {
-  background-color: #555;
-}
-
 /* 暗色模式下模态框样式 */
 .dark-mode .modal-content {
   background-color: #333;
@@ -91,11 +96,6 @@ body.dark-mode {
 }
 
 .dark-mode .modal a {
-  color: #fff;
-}
-
-/* 暗色模式下链接样式 */
-.dark-mode a {
   color: #fff;
 }
 
@@ -310,7 +310,7 @@ body.dark-mode {
   border: 1px solid #888;
   width: 80%;
   max-width: 700px;
-  border-radius: 5px; /* 圆角边框 */
+  border-radius: 5px; /* 圆角 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
   animation: slideDown 0.5s; /* 下滑动画 */
 }
@@ -448,5 +448,3 @@ a {
   text-decoration: underline; /* 鼠标悬浮时添加下划线 */
   background-color: #e9e9e9; /* 鼠标悬浮时的背景颜色 */
 }
-
-/* 其他样式保持不变 */px
