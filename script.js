@@ -12,44 +12,23 @@ document.addEventListener('DOMContentLoaded', function() {
       sliderBar.style.left = `${rect.left}px`; // 设置滑动条左边距
     }
   }
-  
-  document.querySelectorAll('section').forEach(function(section) {
-    // 为每个section元素添加点击事件监听器
-    section.addEventListener('click', function() {
-      // 获取section的父元素div的id
-      var parentId = section.parentNode.id;
-      // 获取section的id
-      var sectionId = section.id;
-      // 构建文件路径
-      var filePath = parentId + '/' + sectionId + '.html';
-      // 执行跳转
-      window.location.href = filePath;
-    });
-  });
 
   function toggleDarkMode() { // 切换暗色模式的函数
     document.body.classList.toggle('dark-mode'); // 切换body的dark-mode类
   }
 
   function showContent(target) { // 显示对应内容的函数
-    const currentActive = document.querySelector('.content.active'); // 获取当前激活的内容区域
-    if (currentActive) {
-      currentActive.classList.remove('active'); // 移除当前激活内容区域的激活状态
-      setTimeout(() => { // 等待动画完成后再添加激活状态
-        currentActive.style.opacity = '0'; // 向下隐藏
-        currentActive.style.transform = 'translateY(20px)'; // 向下移动20px
-      }, 500); // 等待0.5秒后开始隐藏动画
-    }
-    const activeContent = document.getElementById(target); // 获取目标内容区域
-    if (activeContent) {
-      activeContent.style.opacity = '0'; // 初始不透明度为0
-      activeContent.style.transform = 'translateY(20px)'; // 初始向上移动20px
-      activeContent.classList.add('active'); // 为目标内容区域添加激活状态
-      setTimeout(() => { // 等待动画完成后开始显示动画
-        activeContent.style.opacity = '1'; // 向上显示
-        activeContent.style.transform = 'translateY(0)'; // 移回原位
-      }, 100); // 等待0.1秒后开始显示动画
-    }
+    contents.forEach(content => {
+      if (content.id === target) {
+        content.style.opacity = '1'; // 向上显示
+        content.style.transform = 'translateY(0)'; // 移回原位
+        content.classList.add('active');
+      } else {
+        content.classList.remove('active');
+        content.style.opacity = '0'; // 向下隐藏
+        content.style.transform = 'translateY(20px)'; // 向下移动20px
+      }
+    });
     updateSliderPosition(); // 更新滑动条位置
   }
 
@@ -65,4 +44,33 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   modeToggle.addEventListener('click', toggleDarkMode); // 为模式切换按钮添加点击事件
+
+  // 动态渲染帖子的函数
+  function renderPosts(contentId, posts) {
+    const content = document.getElementById(contentId);
+    content.innerHTML = ''; // 清空内容区域
+    posts.forEach(post => {
+      const postElement = document.createElement('div');
+      postElement.className = 'post';
+      postElement.innerHTML = `
+        <h3 class="post-title">${post.title}</h3>
+        <p class="post-summary">${post.summary}</p>
+      `;
+      // 为帖子添加点击事件，跳转到对应的HTML页面
+      postElement.addEventListener('click', function() {
+        window.location.href = post.href;
+      });
+      content.appendChild(postElement);
+    });
+  }
+
+  // 读取JSON索引文件并渲染帖子
+  fetch('index.json')
+    .then(response => response.json())
+    .then(data => {
+      renderPosts('encyclopedia', data.encyclopedia);
+      renderPosts('downloads', data.downloads);
+      renderPosts('announcements', data.announcements);
+    })
+    .catch(error => console.error('Error loading the index JSON:', error));
 });
