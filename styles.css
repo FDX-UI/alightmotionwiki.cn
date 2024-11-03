@@ -27,6 +27,10 @@ body {
   color: #fff; /* 白色 */
 }
 
+.dark-mode section{
+    background-color: #fff;
+    color:#000;
+}
 /* 导航栏容器样式 */
 .slider-navigation {
   display: flex;
@@ -153,6 +157,7 @@ body {
 .content {
   display: none;
   opacity: 0;
+  padding: 16px;
   transition: opacity 0.5s ease, transform 0.5s ease;
   transform: translateY(-20px);
 }
@@ -161,4 +166,15 @@ body {
   display: block;
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 主要内容部分样式 */
+section {
+    background-color: #2e2e2e;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #3c3c3c;
+    color:#fff;
 }
