@@ -12,6 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
       sliderBar.style.left = `${rect.left}px`; // 设置滑动条左边距
     }
   }
+  
+  document.querySelectorAll('section').forEach(function(section) {
+    // 为每个section元素添加点击事件监听器
+    section.addEventListener('click', function() {
+      // 获取section的父元素div的id
+      var parentId = section.parentNode.id;
+      // 获取section的id
+      var sectionId = section.id;
+      // 构建文件路径
+      var filePath = parentId + '/' + sectionId + '.html';
+      // 执行跳转
+      window.location.href = filePath;
+    });
+  });
 
   function toggleDarkMode() { // 切换暗色模式的函数
     document.body.classList.toggle('dark-mode'); // 切换body的dark-mode类
