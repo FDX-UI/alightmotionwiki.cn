@@ -1,53 +1,112 @@
 document.addEventListener('DOMContentLoaded', function() {
-  const navItems = document.querySelectorAll('.nav-item'); // 获取所有的导航项
-  const sliderBar = document.querySelector('.slider-bar'); // 获取滑动条元素
-  const modeToggle = document.getElementById('modeToggle'); // 获取模式切换按钮
-  const contents = document.querySelectorAll('.content'); // 获取所有的内容区域
+  const navItems = document.querySelectorAll('.nav-item');
+  const sliderBar = document.querySelector('.slider-bar');
+  const modeToggle = document.getElementById('modeToggle');
+  const contents = document.querySelectorAll('.content');
+  const searchBox = document.querySelector('.search-box');
+  const searchButton = document.querySelector('.search-button');
+  const searchModal = document.getElementById('searchModal');
+  const searchResults = document.getElementById('searchResults');
+  const closeBtn = document.querySelector('.close');
 
-  function updateSliderPosition() { // 更新滑动条位置的函数
-    const activeItem = document.querySelector('.nav-item.active'); // 获取当前激活的导航项
+  let allPosts = []; // 用于存储所有帖子数据
+
+  function updateSliderPosition() {
+    const activeItem = document.querySelector('.nav-item.active');
     if (activeItem) {
-      const rect = activeItem.getBoundingClientRect(); // 获取激活项的位置和尺寸
-      sliderBar.style.width = `${rect.width}px`; // 设置滑动条宽度
-      sliderBar.style.left = `${rect.left}px`; // 设置滑动条左边距
+      const rect = activeItem.getBoundingClientRect();
+      sliderBar.style.width = `${rect.width}px`;
+      sliderBar.style.left = `${rect.left}px`;
     }
   }
 
-  function toggleDarkMode() { // 切换暗色模式的函数
-    document.body.classList.toggle('dark-mode'); // 切换body的dark-mode类
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    if (document.body.classList.contains('dark-mode')) {
+      modeToggle.querySelector('.fa-sun').style.display = 'inline-block';
+      modeToggle.querySelector('.fa-moon').style.display = 'none';
+    } else {
+      modeToggle.querySelector('.fa-sun').style.display = 'none';
+      modeToggle.querySelector('.fa-moon').style.display = 'inline-block';
+    }
   }
 
-  function showContent(target) { // 显示对应内容的函数
+  function showContent(target) {
     contents.forEach(content => {
       if (content.id === target) {
-        content.style.opacity = '1'; // 向上显示
-        content.style.transform = 'translateY(0)'; // 移回原位
+        content.style.opacity = '1';
+        content.style.transform = 'translateY(0)';
         content.classList.add('active');
-        content.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // 定义动画效果
       } else {
         content.classList.remove('active');
-        content.style.opacity = '0'; // 向下隐藏
-        content.style.transform = 'translateY(20px)'; // 向下移动20px
-        content.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // 定义动画效果
+        content.style.opacity = '0';
+        content.style.transform = 'translateY(20px)';
       }
     });
-    updateSliderPosition(); // 更新滑动条位置
+    updateSliderPosition();
   }
 
-  updateSliderPosition(); // 初始化滑块位置
+  updateSliderPosition();
 
-  navItems.forEach(item => { // 为每个导航项添加点击事件
+  navItems.forEach(item => {
     item.addEventListener('click', function() {
-      navItems.forEach(i => i.classList.remove('active')); // 移除所有导航项的激活状态
-      this.classList.add('active'); // 为当前点击的导航项添加激活状态
-      const target = this.getAttribute('data-target'); // 获取导航项对应的内容区域ID
-      showContent(target); // 显示对应的内容区域
+      navItems.forEach(i => i.classList.remove('active'));
+      this.classList.add('active');
+      const target = this.getAttribute('data-target');
+      showContent(target);
     });
   });
 
-  modeToggle.addEventListener('click', toggleDarkMode); // 为模式切换按钮添加点击事件
+  modeToggle.addEventListener('click', toggleDarkMode);
 
-  // 动态渲染帖子的函数
+  // 读取JSON索引文件并渲染帖子
+  fetch('index.json')
+    .then(response => response.json())
+    .then(data => {
+      allPosts = [].concat(data.encyclopedia, data.downloads, data.announcements);
+      renderPosts('encyclopedia', data.encyclopedia);
+      renderPosts('downloads', data.downloads);
+      renderPosts('announcements', data.announcements);
+    })
+    .catch(error => console.error('Error loading the index JSON:', error));
+
+  // 搜索功能
+  searchButton.addEventListener('click', function() {
+    const query = searchBox.value.trim().toLowerCase();
+    if (query) {
+      const results = allPosts.filter(post =>
+        post.title.toLowerCase().includes(query) ||
+        post.summary.toLowerCase().includes(query) ||
+        post.searchable.toLowerCase().includes(query)
+      );
+      displaySearchResults(results);
+      openModal(results.length > 0);
+    } else {
+      openModal(false);
+    }
+  });
+
+  function displaySearchResults(results) {
+    searchResults.innerHTML = ''; // 清空之前的搜索结果
+    if (results.length === 0) {
+      searchResults.innerHTML = '<li>没有找到相关帖子。</li>';
+    } else {
+      results.forEach(result => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a href="${result.href}" target="_blank">${result.title} - ${result.summary}</a>`;
+        searchResults.appendChild(li);
+      });
+    }
+  }
+
+  function openModal(hasResults) {
+    searchModal.style.display = hasResults ? 'block' : 'none';
+  }
+
+  closeBtn.addEventListener('click', function() {
+    searchModal.style.display = 'none';
+  });
+
   function renderPosts(contentId, posts) {
     const content = document.getElementById(contentId);
     content.innerHTML = ''; // 清空内容区域
@@ -58,23 +117,11 @@ document.addEventListener('DOMContentLoaded', function() {
         <h3 class="post-title">${post.title}</h3>
         <p class="post-summary">${post.summary}</p>
       `;
-      // 为帖子添加点击事件，跳转到对应的HTML页面
       postElement.addEventListener('click', function() {
         window.location.href = post.href;
       });
-      // 应用进入动画
-      postElement.style.animation = 'slide-in 0.5s ease forwards';
       content.appendChild(postElement);
+      postElement.style.animation = 'slide-in 0.5s ease forwards';
     });
   }
-
-  // 读取JSON索引文件并渲染帖子
-  fetch('index.json')
-    .then(response => response.json())
-    .then(data => {
-      renderPosts('encyclopedia', data.encyclopedia);
-      renderPosts('downloads', data.downloads);
-      renderPosts('announcements', data.announcements);
-    })
-    .catch(error => console.error('Error loading the index JSON:', error));
 });

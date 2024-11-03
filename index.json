@@ -3,26 +3,30 @@
     {
       "title": "第一贴",
       "summary": "第一贴的摘要信息。",
-      "href": "encyclopedia/第一贴.html"
+      "href": "encyclopedia/第一贴.html",
+      "searchable": "第一贴 相关关键词1 相关关键词2"
     },
     {
       "title": "第二贴",
       "summary": "第二贴的摘要信息。",
-      "href": "encyclopedia/第二贴.html"
+      "href": "encyclopedia/第二贴.html",
+      "searchable": "第二贴 相关关键词1 相关关键词2"
     }
   ],
   "downloads": [
     {
       "title": "下载帖",
       "summary": "下载帖的摘要信息。",
-      "href": "downloads/下载贴.html"
+      "href": "downloads/下载贴.html",
+      "searchable": "下载 软件 安装"
     }
   ],
   "announcements": [
     {
       "title": "公告帖",
       "summary": "公告帖的摘要信息。",
-      "href": "announcements/公告贴.html"
+      "href": "announcements/公告贴.html",
+      "searchable": "公告 通知"
     }
   ]
 }
