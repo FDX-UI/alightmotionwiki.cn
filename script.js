@@ -23,10 +23,12 @@ document.addEventListener('DOMContentLoaded', function() {
         content.style.opacity = '1'; // 向上显示
         content.style.transform = 'translateY(0)'; // 移回原位
         content.classList.add('active');
+        content.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // 定义动画效果
       } else {
         content.classList.remove('active');
         content.style.opacity = '0'; // 向下隐藏
         content.style.transform = 'translateY(20px)'; // 向下移动20px
+        content.style.transition = 'opacity 0.5s ease, transform 0.5s ease'; // 定义动画效果
       }
     });
     updateSliderPosition(); // 更新滑动条位置
@@ -60,6 +62,8 @@ document.addEventListener('DOMContentLoaded', function() {
       postElement.addEventListener('click', function() {
         window.location.href = post.href;
       });
+      // 应用进入动画
+      postElement.style.animation = 'slide-in 0.5s ease forwards';
       content.appendChild(postElement);
     });
   }

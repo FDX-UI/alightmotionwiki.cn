@@ -39,6 +39,7 @@ body {
 .dark-mode .search-button {
 box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
 }
+
 /* 导航栏容器样式 */
 .slider-navigation {
   display: flex;
@@ -182,25 +183,44 @@ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
   transform: translateY(0);
 }
 
-/* 帖子容器样式 */
+/* 帖子进入动画 */
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 帖子退出动画 */
+@keyframes slide-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* 帖子容器样式，添加动画效果 */
 .post {
   margin-bottom: 20px;
-  padding: 10px;
+  padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: #f9f9f9;
+  animation: slide-in 0.5s ease forwards; /* 默认进入动画 */
+  opacity: 0; /* 初始状态为透明 */
+  transform: translateY(20px); /* 初始状态向上偏移 */
+  transition: opacity 0.5s ease, transform 0.5s ease; /* 定义过渡动画 */
 }
 
-/* 帖子标题样式 */
-.post-title {
-  margin: 0;
-  font-size: 1.2em;
-  color: #333;
-}
-
-/* 帖子摘要样式 */
-.post-summary {
-  margin-top: 5px;
-  font-size: 1em;
-  color: #666;
+/* 当帖子被点击时，添加一个退出动画 */
+.post.clicked {
+  animation: slide-out 0.5s ease forwards;
 }
