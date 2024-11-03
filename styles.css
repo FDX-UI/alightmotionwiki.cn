@@ -181,3 +181,14 @@ box-shadow: 0 4px 8px rgba(255, 255, 255, 0.2);
   opacity: 1;
   transform: translateY(0);
 }
+
+/* 板块样式 */
+section {
+  background-color: #2e2e2e;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3c3c3c;
+  color:#fff;
+}
