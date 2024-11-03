@@ -75,9 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const query = searchBox.value.trim().toLowerCase();
     if (query) {
       const results = allPosts.filter(post =>
-        post.title.toLowerCase().includes(query) ||
-        post.summary.toLowerCase().includes(query) ||
-        post.searchable.toLowerCase().includes(query)
+        (post.title.toLowerCase().includes(query)) ||
+        (post.summary.toLowerCase().includes(query)) ||
+        (post.searchable.toLowerCase().includes(query))
       );
       displaySearchResults(results);
       openModal(results.length > 0);
@@ -97,15 +97,30 @@ document.addEventListener('DOMContentLoaded', function() {
         searchResults.appendChild(li);
       });
     }
+    adjustModalHeight(); // 调整模态框高度
   }
 
   function openModal(hasResults) {
     searchModal.style.display = hasResults ? 'block' : 'none';
+    if (hasResults) {
+      adjustModalHeight(); // 打开模态框时调整高度
+    }
   }
 
   closeBtn.addEventListener('click', function() {
     searchModal.style.display = 'none';
   });
+
+  function adjustModalHeight() {
+    const modalContent = document.querySelector('.modal-content');
+    const searchResults = document.getElementById('searchResults');
+    
+    // 计算内容高度
+    const contentHeight = searchResults.scrollHeight;
+    
+    // 设置模态框的高度
+    modalContent.style.height = `${contentHeight + 40}px`; // 加上一些额外的padding
+  }
 
   function renderPosts(contentId, posts) {
     const content = document.getElementById(contentId);
